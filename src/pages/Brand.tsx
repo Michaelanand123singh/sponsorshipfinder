@@ -61,7 +61,7 @@ const Brand: React.FC = () => {
               </AlertDialogTrigger>
               <AlertDialogContent className="max-w-4xl h-3/4">
                 <iframe 
-                  src="https://docs.google.com/forms/d/e/1FAIpQLSeosG9NXjJk7rzDDIjEpqt94XTuhghcBOiYOAbOc-AQj0Wtvw/viewform?embedded=true"
+                  src="https://docs.google.com/forms/d/e/1FAIpQLSehOkCEicsrYu23XbRA7Z5SOsPleNrr7ju_K6JS4dx1NckiBg/viewform?embedded=true"
                   className="w-full h-full border-0"
                   title="Get Started Form"
                 >

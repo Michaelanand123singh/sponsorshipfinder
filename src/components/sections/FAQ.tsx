@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 const FAQ = () => {
   const [activeQuestion, setActiveQuestion] = useState<number | null>(null);
-
-  const toggleQuestion = (index: number) => {
-    setActiveQuestion(activeQuestion === index ? null : index);
-  };
 
   const faqs = {
     enhanced: [
@@ -30,70 +26,69 @@ const FAQ = () => {
       },
       {
         question: "Can I cancel my Premium subscription anytime?",
-        answer: "Yes, you can cancel your Premium subscription at any time. You’ll continue to have access to Premium features until the end of the current billing cycle."
+        answer: "Yes, you can cancel your Premium subscription at any time. You'll continue to have access to Premium features until the end of the current billing cycle."
       },
       {
         question: "Do you offer a money-back guarantee for the Premium plan?",
-        answer: "Yes, we offer a 30-day money-back guarantee for the Premium plan. If you’re not satisfied with the service, you can request a refund within 30 days of your purchase."
+        answer: "Yes, we offer a 30-day money-back guarantee for the Premium plan. If you're not satisfied with the service, you can request a refund within 30 days of your purchase."
       },
     ]
   };
 
   return (
-    <section className="py-16 bg-gray-50">
-      <div className="container mx-auto text-center">
-        <h2 className="text-4xl font-bold text-gray-800 mb-8">Frequently Asked Questions</h2>
+    <section className="py-24 bg-gradient-to-b from-gray-50 to-white">
+      <div className="container px-4 mx-auto max-w-4xl">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-gray-900 mb-4 tracking-tight">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-lg text-gray-600">
+            Find answers to common questions about our plans and features
+          </p>
+        </div>
 
-        <div className="space-y-12">
-          {/* Enhanced FAQs */}
-          <div>
-            <h3 className="text-2xl font-semibold text-gray-800 mb-4">Enhanced Plan FAQs</h3>
-            <div className="space-y-4">
-              {faqs.enhanced.map((faq, index) => (
-                <div key={index} className="bg-white p-6 rounded-lg shadow-md">
-                  <div 
-                    onClick={() => toggleQuestion(index)}
-                    className="flex justify-between items-center cursor-pointer mb-4"
-                  >
-                    <p className="text-lg font-semibold text-gray-800">{faq.question}</p>
-                    {activeQuestion === index ? (
-                      <ChevronUp className="w-6 h-6 text-gray-600" />
-                    ) : (
-                      <ChevronDown className="w-6 h-6 text-gray-600" />
-                    )}
-                  </div>
-                  {activeQuestion === index && (
-                    <p className="text-gray-600">{faq.answer}</p>
-                  )}
-                </div>
-              ))}
+        <div className="grid gap-12">
+          {Object.entries(faqs).map(([category, questions], categoryIndex) => (
+            <div key={category} className="space-y-4">
+              <h3 className="text-2xl font-semibold text-gray-900 mb-6 capitalize">
+                {category} Plan FAQs
+              </h3>
+              <div className="space-y-3">
+                {questions.map((faq, index) => {
+                  const questionIndex = categoryIndex * questions.length + index;
+                  const isActive = activeQuestion === questionIndex;
+                  
+                  return (
+                    <div 
+                      key={index}
+                      className="border border-gray-200 rounded-xl overflow-hidden bg-white hover:border-gray-300 transition-colors duration-200"
+                    >
+                      <button
+                        onClick={() => setActiveQuestion(isActive ? null : questionIndex)}
+                        className="w-full text-left px-6 py-4 flex items-center justify-between gap-4"
+                      >
+                        <span className="text-lg font-medium text-gray-900">
+                          {faq.question}
+                        </span>
+                        <ChevronDown 
+                          className={`w-5 h-5 text-gray-500 transition-transform duration-200 flex-shrink-0
+                            ${isActive ? 'rotate-180' : ''}`}
+                        />
+                      </button>
+                      <div 
+                        className={`overflow-hidden transition-all duration-200 ease-in-out
+                          ${isActive ? 'max-h-96' : 'max-h-0'}`}
+                      >
+                        <p className="px-6 pb-4 text-gray-600 leading-relaxed">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-
-          {/* Premium FAQs */}
-          <div>
-            <h3 className="text-2xl font-semibold text-gray-800 mb-4">Premium Plan FAQs</h3>
-            <div className="space-y-4">
-              {faqs.premium.map((faq, index) => (
-                <div key={index} className="bg-white p-6 rounded-lg shadow-md">
-                  <div 
-                    onClick={() => toggleQuestion(index + faqs.enhanced.length)}
-                    className="flex justify-between items-center cursor-pointer mb-4"
-                  >
-                    <p className="text-lg font-semibold text-gray-800">{faq.question}</p>
-                    {activeQuestion === index + faqs.enhanced.length ? (
-                      <ChevronUp className="w-6 h-6 text-gray-600" />
-                    ) : (
-                      <ChevronDown className="w-6 h-6 text-gray-600" />
-                    )}
-                  </div>
-                  {activeQuestion === index + faqs.enhanced.length && (
-                    <p className="text-gray-600">{faq.answer}</p>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
