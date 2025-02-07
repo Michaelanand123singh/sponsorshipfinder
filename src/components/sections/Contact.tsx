@@ -15,7 +15,7 @@ const Contact = () => {
     setLoading(true);
     
     try {
-      const response = await fetch('YOUR_GOOGLE_APPS_SCRIPT_URL', {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbwRfxG7wNLQBeb_faKr4laH0OS00tKhTkuq5yqQeAEJoahIMfLlvsONb-usO4gYWIKN9Q/exec', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
