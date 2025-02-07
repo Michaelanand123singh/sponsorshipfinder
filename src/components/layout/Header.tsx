@@ -25,11 +25,13 @@ const Header = () => {
           <div className="flex items-center space-x-8">
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2 hover:opacity-90 transition-opacity">
-              <Search className="w-6 h-6 text-blue-600" />
-              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                SponsorshipFinder
-              </span>
-            </Link>
+            <Search className="w-6 h-6 text-blue-600" />
+  <span className="text-xl font-bold">
+    <span style={{ color: '#FB8003' }}>Sponsor</span>
+    <span style={{ color: '#1F4D6E' }}>ship Finder</span>
+  </span>
+</Link>
+
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-6">
