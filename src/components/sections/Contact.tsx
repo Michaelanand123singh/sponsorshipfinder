@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Send, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import { Send, Loader2, CheckCircle, AlertCircle, Phone, Mail, MessageCircle } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -10,13 +10,19 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState({ type: '', message: '' });
 
+  const contactInfo = {
+    whatsapp: '+91 8083360878',
+    phone: '+91 8083360878',
+    email: 'official.sponsorshipfinder@gmail.com',
+    address: 'New Delhi, India'
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setStatus({ type: '', message: '' });
 
     try {
-      // Create form data
       const form = new FormData();
       form.append('name', formData.name);
       form.append('email', formData.email);
@@ -42,20 +48,57 @@ const Contact = () => {
     setLoading(false);
   };
 
+  const handleWhatsAppClick = () => {
+    const url = `https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, '')}`;
+    window.open(url, '_blank');
+  };
+
   return (
     <section className="py-24 bg-gradient-to-b from-gray-50 to-white">
       <div className="container px-4 mx-auto max-w-6xl">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="text-left">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4 tracking-tight">
-              Let's Start a Conversation
-            </h2>
-            <p className="text-lg text-gray-600 mb-8">
-              Have questions? Send us a message and we'll respond as soon as possible.
-            </p>
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          <div className="space-y-8">
+            <div>
+              <h2 className="text-4xl font-bold text-gray-900 mb-4 tracking-tight">
+                Let's Start a Conversation
+              </h2>
+              <p className="text-lg text-gray-600">
+                Have questions? Reach out through any of these channels.
+              </p>
+            </div>
+
+            <div className="space-y-6">
+              <button
+                onClick={handleWhatsAppClick}
+                className="w-full flex items-center gap-3 p-4 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors"
+              >
+                <MessageCircle className="w-6 h-6" />
+                <span>Chat on WhatsApp</span>
+              </button>
+
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 text-gray-700">
+                  <Phone className="w-5 h-5" />
+                  <a href={`tel:${contactInfo.phone}`} className="hover:text-blue-600">
+                    {contactInfo.phone}
+                  </a>
+                </div>
+                <div className="flex items-center gap-3 text-gray-700">
+                  <Mail className="w-5 h-5" />
+                  <a href={`mailto:${contactInfo.email}`} className="hover:text-blue-600">
+                    {contactInfo.email}
+                  </a>
+                </div>
+                <div className="text-gray-700">
+                  <p className="font-medium mb-1">Visit Us</p>
+                  <p>{contactInfo.address}</p>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="bg-white rounded-2xl shadow-xl p-8">
+            <h3 className="text-xl font-semibold mb-6">Send us a message</h3>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
