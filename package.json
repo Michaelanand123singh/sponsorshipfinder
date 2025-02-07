@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@radix-ui/react-alert-dialog": "^1.1.6",
+    "@radix-ui/react-dialog": "^1.1.6",
     "@radix-ui/react-popover": "^1.1.5",
     "@radix-ui/react-tabs": "^1.1.2",
     "@tremor/react": "^3.18.7",

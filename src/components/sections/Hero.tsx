@@ -57,14 +57,14 @@ const Hero = () => {
               to="/influencer"
               className="w-full sm:w-auto px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 flex items-center justify-center space-x-2 hover:shadow-lg group"
             >
-              <span>Find Sponsors</span>
+              <span>I am Influencer</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link 
               to="/brand"
-              className="w-full sm:w-auto px-8 py-4 border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-50 transition-all duration-300 hover:border-blue-600 hover:text-blue-600"
+              className="w-full sm:w-auto px-8 py-4 border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-50 transition-all duration-300 hover:border-green-600 hover:text-green-600"
             >
-              I'm a Sponsor
+              I'm a Brand
             </Link>
           </div>
           

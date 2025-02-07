@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/layout/Card';
 import { Button } from '../components/layout/Button';
 import { ArrowRight, BarChart, Target, Users, Zap } from 'lucide-react';
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogTrigger,
+} from "../components/layout/Dialog";
 
 interface BrandFeature {
   icon: React.ReactNode;
@@ -10,6 +15,8 @@ interface BrandFeature {
 }
 
 const Brand: React.FC = () => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
   const features: BrandFeature[] = [
     {
       icon: <Target className="w-6 h-6 text-blue-500" />,
@@ -45,10 +52,23 @@ const Brand: React.FC = () => {
             <p className="text-xl mb-8">
               Connect with authentic creators who share your brand's vision and values
             </p>
-            <Button className="bg-white text-blue-600 hover:bg-blue-50">
-              Get Started
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button className="bg-white text-blue-600 hover:bg-blue-50">
+                  Get Started
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent className="max-w-4xl h-3/4">
+                <iframe 
+                  src="https://docs.google.com/forms/d/e/1FAIpQLSeosG9NXjJk7rzDDIjEpqt94XTuhghcBOiYOAbOc-AQj0Wtvw/viewform?embedded=true"
+                  className="w-full h-full border-0"
+                  title="Get Started Form"
+                >
+                  Loading form...
+                </iframe>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         </div>
       </section>

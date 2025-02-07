@@ -2,6 +2,11 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/layout/Card';
 import { Button } from '../components/layout/Button';
 import { DollarSign, ShieldCheck, Sparkles, TrendingUp } from 'lucide-react';
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogTrigger,
+} from "../components/layout/Dialog";
 
 interface InfluencerBenefit {
   icon: React.ReactNode;
@@ -45,9 +50,22 @@ const Influencer: React.FC = () => {
             <p className="text-xl mb-8">
               Connect with brands that value your authentic voice and creative content
             </p>
-            <Button className="bg-white text-purple-600 hover:bg-purple-50">
-              Join as Creator
-            </Button>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button className="bg-white text-purple-600 hover:bg-purple-50">
+                  Join as Creator
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent className="max-w-4xl h-3/4">
+                <iframe 
+                  src="https://docs.google.com/forms/d/e/1FAIpQLSeosG9NXjJk7rzDDIjEpqt94XTuhghcBOiYOAbOc-AQj0Wtvw/viewform?embedded=true"
+                  className="w-full h-full border-0"
+                  title="Join as Creator Form"
+                >
+                  Loading form...
+                </iframe>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         </div>
       </section>
