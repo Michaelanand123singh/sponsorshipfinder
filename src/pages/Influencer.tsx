@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/layout/Card';
 import { Button } from '../components/layout/Button';
 import { DollarSign, ShieldCheck, Sparkles, TrendingUp } from 'lucide-react';
@@ -14,7 +14,41 @@ interface InfluencerBenefit {
   description: string;
 }
 
+declare global {
+  interface Window {
+    Calendly?: any;
+  }
+}
+
 const Influencer: React.FC = () => {
+  useEffect(() => {
+    // Add Calendly script
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    // Add Calendly stylesheet
+    const link = document.createElement('link');
+    link.href = 'https://assets.calendly.com/assets/external/widget.css';
+    link.rel = 'stylesheet';
+    document.head.appendChild(link);
+
+    return () => {
+      // Cleanup
+      document.body.removeChild(script);
+      document.head.removeChild(link);
+    };
+  }, []);
+
+  const openCalendly = () => {
+    if (window.Calendly) {
+      window.Calendly.initPopupWidget({
+        url: 'https://calendly.com/official-sponsorshipfinder/30min'
+      });
+    }
+  };
+
   const benefits: InfluencerBenefit[] = [
     {
       icon: <DollarSign className="w-6 h-6 text-purple-500" />,
@@ -121,7 +155,10 @@ const Influencer: React.FC = () => {
           <p className="text-xl text-gray-600 mb-8">
             Join our community of successful creators and start earning
           </p>
-          <Button className="bg-purple-600 text-white hover:bg-purple-700">
+          <Button 
+            className="bg-purple-600 text-white hover:bg-purple-700"
+            onClick={openCalendly}
+          >
             Apply Now
           </Button>
         </div>

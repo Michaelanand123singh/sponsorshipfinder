@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/layout/Card';
 import { Button } from '../components/layout/Button';
 import { ArrowRight, BarChart, Target, Users, Zap } from 'lucide-react';
@@ -14,8 +14,42 @@ interface BrandFeature {
   description: string;
 }
 
+declare global {
+  interface Window {
+    Calendly?: any;
+  }
+}
+
 const Brand: React.FC = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  useEffect(() => {
+    // Add Calendly script
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    // Add Calendly stylesheet
+    const link = document.createElement('link');
+    link.href = 'https://assets.calendly.com/assets/external/widget.css';
+    link.rel = 'stylesheet';
+    document.head.appendChild(link);
+
+    return () => {
+      // Cleanup
+      document.body.removeChild(script);
+      document.head.removeChild(link);
+    };
+  }, []);
+
+  const openCalendly = () => {
+    if (window.Calendly) {
+      window.Calendly.initPopupWidget({
+        url: 'https://calendly.com/official-sponsorshipfinder/30min'
+      });
+    }
+  };
 
   const features: BrandFeature[] = [
     {
@@ -104,7 +138,10 @@ const Brand: React.FC = () => {
           <p className="text-xl text-gray-600 mb-8">
             Join thousands of successful brands using our platform
           </p>
-          <Button className="bg-blue-600 text-white hover:bg-blue-700">
+          <Button 
+            className="bg-blue-600 text-white hover:bg-blue-700"
+            onClick={openCalendly}
+          >
             Schedule a Demo
           </Button>
         </div>
