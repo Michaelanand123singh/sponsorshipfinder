@@ -4,6 +4,8 @@ import Layout from './components/layout/Layout';
 import Home from './pages/Home';
 import Brand from './pages/Brand';
 import Influencer from './pages/Influencer';
+import InfluencerData from './pages/Influencer-data';
+import BrandData from './pages/Brand-data';
 
 const App: React.FC = () => {
   return (
@@ -19,6 +21,10 @@ const App: React.FC = () => {
             
             {/* Influencer Dashboard Route */}
             <Route path="/influencer" element={<Influencer />} />
+
+            <Route path="/influencers" element={<InfluencerData/>} />
+
+            <Route path="/brands" element={<BrandData />} />
 
             {/* Catch all route - 404 */}
             <Route

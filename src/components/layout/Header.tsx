@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, ChevronDown, User } from 'lucide-react';
+import { Search, ChevronDown, User, Menu, X } from 'lucide-react';
 
 const Header = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
     <header className="fixed top-0 left-0 right-0 bg-gradient-to-r from-white/95 to-gray-50/95 backdrop-blur-md z-50 border-b border-gray-100">
@@ -24,27 +25,59 @@ const Header = () => {
             </span>
           </Link>
 
-          {/* Profile Dropdown */}
-          <div className="relative">
-            <button
-              onClick={() => setIsProfileOpen(!isProfileOpen)}
-              className="flex items-center space-x-2 px-4 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+          {/* Main Navigation - Desktop */}
+          <div className="hidden md:flex items-center space-x-6">
+            <Link to="/" className="font-medium text-gray-700 hover:text-blue-600 transition-colors">
+              Home
+            </Link>
+            <Link to="/influencers" className="font-medium text-gray-700 hover:text-blue-600 transition-colors">
+              Influencers
+            </Link>
+            <Link to="/brands" className="font-medium text-gray-700 hover:text-blue-600 transition-colors">
+              Brands
+            </Link>
+          </div>
+
+          <div className="flex items-center space-x-4">
+            {/* Mobile Menu Button */}
+            <button 
+              className="md:hidden text-gray-700 hover:text-blue-600 transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              <User className="w-5 h-5" />
-              <span className="hidden md:inline">Account</span>
-              <ChevronDown className="w-4 h-4" />
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
 
-            {isProfileOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 py-2">
-                <Link to="/profile" className="block px-4 py-2 text-gray-700 hover:bg-gray-50">Profile</Link>
-                <Link to="/settings" className="block px-4 py-2 text-gray-700 hover:bg-gray-50">Settings</Link>
-                <hr className="my-2 border-gray-100" />
-                <Link to="/logout" className="block px-4 py-2 text-red-600 hover:bg-gray-50">Logout</Link>
-              </div>
-            )}
+            {/* Profile Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setIsProfileOpen(!isProfileOpen)}
+                className="flex items-center space-x-2 px-4 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+              >
+                <User className="w-5 h-5" />
+                <span className="hidden md:inline">Account</span>
+                <ChevronDown className="w-4 h-4" />
+              </button>
+
+              {isProfileOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 py-2">
+                  <Link to="/profile" className="block px-4 py-2 text-gray-700 hover:bg-gray-50">Profile</Link>
+                  <Link to="/settings" className="block px-4 py-2 text-gray-700 hover:bg-gray-50">Settings</Link>
+                  <hr className="my-2 border-gray-100" />
+                  <Link to="/logout" className="block px-4 py-2 text-red-600 hover:bg-gray-50">Logout</Link>
+                </div>
+              )}
+            </div>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden mt-4 py-4 bg-white rounded-lg shadow-lg border border-gray-100">
+            <Link to="/" className="block px-4 py-2 text-gray-700 hover:bg-gray-50">Home</Link>
+            <Link to="/influencers" className="block px-4 py-2 text-gray-700 hover:bg-gray-50">Influencers</Link>
+            <Link to="/brands" className="block px-4 py-2 text-gray-700 hover:bg-gray-50">Brands</Link>
+          </div>
+        )}
       </nav>
     </header>
   );
