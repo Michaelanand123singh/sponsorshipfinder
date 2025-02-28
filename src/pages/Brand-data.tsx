@@ -7,6 +7,7 @@ import {
   getBrandsByNiche,
   Brand
 } from '../libs/data/data-brand';
+import { Link } from 'react-router-dom';
 import { Building, Users, Search, Filter, DollarSign, Globe, Briefcase, Target } from 'lucide-react';
 
 const BrandData: React.FC = () => {
@@ -330,9 +331,11 @@ const BrandData: React.FC = () => {
         <p className="text-gray-600 max-w-2xl mx-auto mb-4 text-sm md:text-base">
           Join our platform to connect with these brands and create impactful partnerships.
         </p>
+        <Link to="/influencer">
         <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-full transition-colors text-sm md:text-base">
           Register as an Influencer
         </button>
+        </Link>
       </div>
     </div>
   );

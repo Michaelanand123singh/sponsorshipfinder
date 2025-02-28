@@ -7,6 +7,7 @@ import {
   Influencer
 } from '../libs/data/data-influencer';
 import { Instagram, Youtube, Twitter, Linkedin, Search, Filter } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const InfluencerData: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'all' | 'niche' | 'followers' | 'platform'>('all');
@@ -315,9 +316,11 @@ const InfluencerData: React.FC = () => {
         <p className="text-gray-600 text-sm max-w-xl mx-auto mb-4">
           Join our platform to connect with these influencers and create impactful marketing campaigns.
         </p>
+        <Link to="/brand">
         <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-full transition-colors text-sm">
           Register as a Brand
         </button>
+        </Link>
       </div>
     </div>
   );

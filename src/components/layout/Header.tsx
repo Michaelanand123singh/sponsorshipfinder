@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Search, ChevronDown, User, Menu, X } from 'lucide-react';
 
 const Header = () => {
+  const location = useLocation(); // This hook gives us the current URL path
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Function to check if a link is active
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 bg-gradient-to-r from-white/95 to-gray-50/95 backdrop-blur-md z-50 border-b border-gray-100">
@@ -27,13 +33,34 @@ const Header = () => {
 
           {/* Main Navigation - Desktop */}
           <div className="hidden md:flex items-center space-x-6">
-            <Link to="/" className="font-medium text-gray-700 hover:text-blue-600 transition-colors">
+            <Link 
+              to="/" 
+              className={`font-medium transition-colors ${
+                isActive('/') 
+                  ? 'text-blue-600' 
+                  : 'text-gray-700 hover:text-blue-600'
+              }`}
+            >
               Home
             </Link>
-            <Link to="/influencers" className="font-medium text-gray-700 hover:text-blue-600 transition-colors">
+            <Link 
+              to="/influencers" 
+              className={`font-medium transition-colors ${
+                isActive('/influencers') 
+                  ? 'text-blue-600' 
+                  : 'text-gray-700 hover:text-blue-600'
+              }`}
+            >
               Influencers
             </Link>
-            <Link to="/brands" className="font-medium text-gray-700 hover:text-blue-600 transition-colors">
+            <Link 
+              to="/brands" 
+              className={`font-medium transition-colors ${
+                isActive('/brands') 
+                  ? 'text-blue-600' 
+                  : 'text-gray-700 hover:text-blue-600'
+              }`}
+            >
               Brands
             </Link>
           </div>
@@ -51,7 +78,11 @@ const Header = () => {
             <div className="relative">
               <button
                 onClick={() => setIsProfileOpen(!isProfileOpen)}
-                className="flex items-center space-x-2 px-4 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+                className={`flex items-center space-x-2 px-4 py-2 rounded-full ${
+                  isProfileOpen 
+                    ? 'bg-blue-700 text-white' 
+                    : 'bg-blue-600 text-white hover:bg-blue-700'
+                } transition-colors`}
               >
                 <User className="w-5 h-5" />
                 <span className="hidden md:inline">Account</span>
@@ -60,8 +91,8 @@ const Header = () => {
 
               {isProfileOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 py-2">
-                  <Link to="/profile" className="block px-4 py-2 text-gray-700 hover:bg-gray-50">Profile</Link>
-                  <Link to="/settings" className="block px-4 py-2 text-gray-700 hover:bg-gray-50">Settings</Link>
+                  <Link to="/profile" className={`block px-4 py-2 ${isActive('/profile') ? 'text-blue-600 bg-gray-50' : 'text-gray-700 hover:bg-gray-50'}`}>Profile</Link>
+                  <Link to="/settings" className={`block px-4 py-2 ${isActive('/settings') ? 'text-blue-600 bg-gray-50' : 'text-gray-700 hover:bg-gray-50'}`}>Settings</Link>
                   <hr className="my-2 border-gray-100" />
                   <Link to="/logout" className="block px-4 py-2 text-red-600 hover:bg-gray-50">Logout</Link>
                 </div>
@@ -73,9 +104,9 @@ const Header = () => {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 py-4 bg-white rounded-lg shadow-lg border border-gray-100">
-            <Link to="/" className="block px-4 py-2 text-gray-700 hover:bg-gray-50">Home</Link>
-            <Link to="/influencers" className="block px-4 py-2 text-gray-700 hover:bg-gray-50">Influencers</Link>
-            <Link to="/brands" className="block px-4 py-2 text-gray-700 hover:bg-gray-50">Brands</Link>
+            <Link to="/" className={`block px-4 py-2 ${isActive('/') ? 'text-blue-600 bg-gray-50' : 'text-gray-700 hover:bg-gray-50'}`}>Home</Link>
+            <Link to="/influencers" className={`block px-4 py-2 ${isActive('/influencers') ? 'text-blue-600 bg-gray-50' : 'text-gray-700 hover:bg-gray-50'}`}>Influencers</Link>
+            <Link to="/brands" className={`block px-4 py-2 ${isActive('/brands') ? 'text-blue-600 bg-gray-50' : 'text-gray-700 hover:bg-gray-50'}`}>Brands</Link>
           </div>
         )}
       </nav>
