@@ -61,8 +61,9 @@ const InfluencerData: React.FC = () => {
   const renderInfluencerCard = (influencer: Influencer) => (
     <div key={influencer.id} className="bg-white rounded-lg shadow overflow-hidden transition-transform hover:shadow-md hover:-translate-y-1">
       <div className="flex flex-col h-full">
-        {/* Reduced header height */}
+        {/* Header with default background image */}
         <div className="bg-gradient-to-r from-blue-500 to-purple-600 h-20 relative">
+      
           <div className="absolute bottom-0 transform translate-y-1/2 left-4">
             {/* Smaller avatar */}
             <div className="w-16 h-16 rounded-full border-2 border-white bg-gray-200 overflow-hidden">
@@ -89,15 +90,11 @@ const InfluencerData: React.FC = () => {
             ))}
           </div>
           
-          {/* Stats with standardized height */}
-          <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
-            <div className="bg-gray-50 p-1.5 rounded">
+          {/* Stats with just followers - removed engagement */}
+          <div className="mt-3">
+            <div className="bg-gray-50 p-1.5 rounded text-xs">
               <p className="text-gray-500">Followers</p>
               <p className="font-bold text-gray-900">{formatNumber(influencer.followers)}</p>
-            </div>
-            <div className="bg-gray-50 p-1.5 rounded">
-              <p className="text-gray-500">Engagement</p>
-              <p className="font-bold text-gray-900">{influencer.engagement}%</p>
             </div>
           </div>
           
@@ -113,7 +110,7 @@ const InfluencerData: React.FC = () => {
   );
 
   return (
-    <div className="container mx-auto px-4 py-12 md:py-24">
+    <div className="container mx-auto px-4 py-28 md:py-24">
       <h1 className="text-3xl font-bold text-center mb-3">Our Influencer Network</h1>
       <p className="text-gray-600 text-center text-sm max-w-2xl mx-auto mb-8">
         Connect with top influencers across various niches and platforms. Our network features content creators with diverse audience sizes and engagement rates.

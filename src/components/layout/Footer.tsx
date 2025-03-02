@@ -52,16 +52,16 @@ const Footer = () => {
 
         {/* Social Media Links */}
         <div className="flex justify-center space-x-6 mb-8">
-          <a href="#" className="text-gray-400 hover:text-white">
+          <a href="https://www.instagram.com/sponsorshipfinder/" className="text-gray-400 hover:text-white">
             <Instagram className="w-6 h-6" />
           </a>
-          <a href="#" className="text-gray-400 hover:text-white">
+          <a href="https://x.com/sponsorfinder9" className="text-gray-400 hover:text-white">
             <Twitter className="w-6 h-6" />
           </a>
-          <a href="#" className="text-gray-400 hover:text-white">
+          <a href="https://www.linkedin.com/company/sponsorshipfinder/" className="text-gray-400 hover:text-white">
             <Linkedin className="w-6 h-6" />
           </a>
-          <a href="#" className="text-gray-400 hover:text-white">
+          <a href="https://www.linkedin.com/company/sponsorshipfinder/" className="text-gray-400 hover:text-white">
             <Facebook className="w-6 h-6" />
           </a>
         </div>

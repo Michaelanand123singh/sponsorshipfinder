@@ -11,6 +11,7 @@ const Feed: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [sortOption, setSortOption] = useState('newest');
   const [showSortDropdown, setShowSortDropdown] = useState(false);
+  const [showGoogleForm, setShowGoogleForm] = useState(false);
 
   // Handle scroll effects
   useEffect(() => {
@@ -60,27 +61,16 @@ const Feed: React.FC = () => {
   const handleCardClick = (req: Requirement) => {
     setSelectedRequirement(req);
     document.body.style.overflow = 'hidden';
+    setShowGoogleForm(false);
   };
 
   const handleApply = () => {
-    // Show success notification
-    const notification = document.getElementById('notification');
-    if (notification) {
-      notification.classList.remove('translate-y-24');
-      notification.classList.add('translate-y-0');
-      
-      setTimeout(() => {
-        notification.classList.remove('translate-y-0');
-        notification.classList.add('translate-y-24');
-      }, 3000);
-    }
-    
-    setSelectedRequirement(null);
-    document.body.style.overflow = 'auto';
+    setShowGoogleForm(true);
   };
 
   const handleClose = () => {
     setSelectedRequirement(null);
+    setShowGoogleForm(false);
     document.body.style.overflow = 'auto';
   };
 
@@ -223,7 +213,8 @@ const Feed: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredRequirements.map((req) => (
               <motion.div 
-                key={req.id} 
+                key={req.id}
+                id={`requirement-card-${req.id}`} 
                 className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300 flex flex-col group"
                 onClick={() => handleCardClick(req)}
                 initial={{ opacity: 0, y: 20 }}
@@ -239,14 +230,17 @@ const Feed: React.FC = () => {
                       </div>
                       <span className="font-medium text-gray-700">{req.brand}</span>
                     </div>
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1
-                      ${req.collaborationType === 'Paid' ? 'bg-emerald-50 text-emerald-700' : 
-                      req.collaborationType === 'Unpaid' ? 'bg-amber-50 text-amber-700' : 
-                      'bg-purple-50 text-purple-700'}`}
-                    >
-                      {getCollaborationIcon(req.collaborationType)}
-                      {req.collaborationType}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className={`px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1
+                        ${req.collaborationType === 'Paid' ? 'bg-emerald-50 text-emerald-700' : 
+                        req.collaborationType === 'Unpaid' ? 'bg-amber-50 text-amber-700' : 
+                        'bg-purple-50 text-purple-700'}`}
+                      >
+                        {getCollaborationIcon(req.collaborationType)}
+                        {req.collaborationType}
+                      </span>
+                      <span className="px-2 py-1 rounded bg-gray-100 text-xs font-mono text-gray-600">ID: {req.id}</span>
+                    </div>
                   </div>
                   <h3 className="text-xl font-bold mb-3 text-gray-900 leading-tight group-hover:text-blue-600 transition-colors">{req.title}</h3>
                   <p className="text-gray-600 text-sm line-clamp-3 mb-4">{req.description}</p>
@@ -339,6 +333,7 @@ const Feed: React.FC = () => {
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               onClick={(e) => e.stopPropagation()}
+              id={`requirement-modal-${selectedRequirement.id}`}
             >
               {/* Header with close button */}
               <div className="relative p-6 border-b border-gray-100">
@@ -355,90 +350,137 @@ const Feed: React.FC = () => {
                     <span className="text-xl font-bold text-blue-600">{selectedRequirement.brand.charAt(0)}</span>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">{selectedRequirement.brand}</p>
+                    <div className="flex items-center gap-2">
+                      <p className="text-sm text-gray-500">{selectedRequirement.brand}</p>
+                      <span className="px-2 py-1 rounded bg-gray-100 text-xs font-mono text-gray-600">ID: {selectedRequirement.id}</span>
+                    </div>
                     <h2 className="text-2xl font-bold text-gray-900">{selectedRequirement.title}</h2>
                   </div>
                 </div>
               </div>
               
-              <div className="p-6">
-                {/* Collaboration type and deadline */}
-                <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
-                  <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium
-                    ${selectedRequirement.collaborationType === 'Paid' ? 'bg-emerald-50 text-emerald-700' : 
-                    selectedRequirement.collaborationType === 'Unpaid' ? 'bg-amber-50 text-amber-700' : 
-                    'bg-purple-50 text-purple-700'}`}
-                  >
-                    {getCollaborationIcon(selectedRequirement.collaborationType)}
-                    {selectedRequirement.collaborationType} Collaboration
-                    {selectedRequirement.budget && selectedRequirement.collaborationType === 'Paid' ? ` · ${selectedRequirement.budget}` : ''}
+              {!showGoogleForm ? (
+                <>
+                  <div className="p-6">
+                    {/* Collaboration type and deadline */}
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
+                      <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium
+                        ${selectedRequirement.collaborationType === 'Paid' ? 'bg-emerald-50 text-emerald-700' : 
+                        selectedRequirement.collaborationType === 'Unpaid' ? 'bg-amber-50 text-amber-700' : 
+                        'bg-purple-50 text-purple-700'}`}
+                      >
+                        {getCollaborationIcon(selectedRequirement.collaborationType)}
+                        {selectedRequirement.collaborationType} Collaboration
+                        {selectedRequirement.budget && selectedRequirement.collaborationType === 'Paid' ? ` · ${selectedRequirement.budget}` : ''}
+                      </div>
+                      <div className="flex items-center gap-2 text-gray-500">
+                        <Calendar className="w-4 h-4" />
+                        <span>Deadline: {formatDate(selectedRequirement.deadline)}</span>
+                      </div>
+                    </div>
+                    
+                    {/* Description */}
+                    <div className="mb-8">
+                      <h3 className="text-lg font-semibold mb-3 text-gray-800">About this opportunity</h3>
+                      <div className="text-gray-700 leading-relaxed space-y-4">
+                        <p>{selectedRequirement.description}</p>
+                      </div>
+                    </div>
+                    
+                    {/* Details grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                      <div className="bg-gray-50 p-4 rounded-xl">
+                        <h4 className="text-sm font-semibold text-gray-500 mb-2">Platform</h4>
+                        <p className="text-gray-900 font-medium">{selectedRequirement.platform}</p>
+                      </div>
+                      <div className="bg-gray-50 p-4 rounded-xl">
+                        <h4 className="text-sm font-semibold text-gray-500 mb-2">Category</h4>
+                        <p className="text-gray-900 font-medium">{selectedRequirement.category}</p>
+                      </div>
+                      <div className="bg-gray-50 p-4 rounded-xl">
+                        <h4 className="text-sm font-semibold text-gray-500 mb-2">Deadline</h4>
+                        <p className="text-gray-900 font-medium">{formatDate(selectedRequirement.deadline)}</p>
+                      </div>
+                      <div className="bg-gray-50 p-4 rounded-xl">
+                        <h4 className="text-sm font-semibold text-gray-500 mb-2">Collaboration Type</h4>
+                        <p className="text-gray-900 font-medium">{selectedRequirement.collaborationType}</p>
+                      </div>
+                    </div>
+                    
+                    {/* Requirements */}
+                    <div className="mb-8">
+                      <h3 className="text-lg font-semibold mb-3 text-gray-800">Requirements</h3>
+                      <ul className="list-disc pl-5 text-gray-700 space-y-2">
+                        {selectedRequirement.requirements ? (
+                          selectedRequirement.requirements.map((req, index) => (
+                            <li key={`${selectedRequirement.id}-req-${index}`}>{req}</li>
+                          ))
+                        ) : (
+                          <>
+                            <li>Minimum {selectedRequirement.platform.includes(',') ? selectedRequirement.platform.split(',')[0].trim() : selectedRequirement.platform} following of 5,000+</li>
+                            <li>Experience creating content in the {selectedRequirement.category} niche</li>
+                            <li>Ability to complete the project before the deadline</li>
+                            <li>Professional communication and timely responses</li>
+                          </>
+                        )}
+                      </ul>
+                    </div>
+                    
+                    {/* How to apply */}
+                    <div className="mb-8">
+                      <h3 className="text-lg font-semibold mb-3 text-gray-800">How to Apply</h3>
+                      <p className="text-gray-700 mb-4">
+                        Click the "Apply for Collaboration" button below to express your interest. The brand will receive your profile and portfolio, and they'll reach out if they'd like to move forward.
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2 text-gray-500">
-                    <Calendar className="w-4 h-4" />
-                    <span>Deadline: {formatDate(selectedRequirement.deadline)}</span>
+                  
+                  {/* Footer with apply button */}
+                  <div className="border-t border-gray-100 p-6 bg-gray-50">
+                    <button 
+                      onClick={handleApply}
+                      className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 flex items-center justify-center gap-2 shadow-md"
+                      id={`apply-button-${selectedRequirement.id}`}
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      Apply for Collaboration
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <div className="p-6">
+                  <h3 className="text-lg font-semibold mb-6 text-gray-800 text-center">Complete the application form</h3>
+                  <div className="flex justify-center">
+                    <iframe 
+                      src="https://docs.google.com/forms/d/e/1FAIpQLSfiJOFxaXFILww08Zd3mpycupETEjMgluncH30J6tLMcfA6yA/viewform?embedded=true" 
+                      width="640" 
+                      height="600" 
+                      frameBorder="0" 
+                      marginHeight="0" 
+                      marginWidth="0"
+                      className="max-w-full"
+                    >
+                      Loading…
+                    </iframe>
+                  </div>
+                  <div className="mt-6 text-center">
+                    <button 
+                      onClick={() => setShowGoogleForm(false)}
+                      className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 transition-colors shadow-sm mr-4"
+                    >
+                      Back to Details
+                    </button>
+                    <button 
+                      onClick={handleClose}
+                      className="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-sm"
+                    >
+                      Close
+                    </button>
                   </div>
                 </div>
-                
-                {/* Description */}
-                <div className="mb-8">
-                  <h3 className="text-lg font-semibold mb-3 text-gray-800">About this opportunity</h3>
-                  <div className="text-gray-700 leading-relaxed space-y-4">
-                    <p>{selectedRequirement.description}</p>
-                  </div>
-                </div>
-                
-                {/* Details grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-                  <div className="bg-gray-50 p-4 rounded-xl">
-                    <h4 className="text-sm font-semibold text-gray-500 mb-2">Platform</h4>
-                    <p className="text-gray-900 font-medium">{selectedRequirement.platform}</p>
-                  </div>
-                  <div className="bg-gray-50 p-4 rounded-xl">
-                    <h4 className="text-sm font-semibold text-gray-500 mb-2">Category</h4>
-                    <p className="text-gray-900 font-medium">{selectedRequirement.category}</p>
-                  </div>
-                  <div className="bg-gray-50 p-4 rounded-xl">
-                    <h4 className="text-sm font-semibold text-gray-500 mb-2">Deadline</h4>
-                    <p className="text-gray-900 font-medium">{formatDate(selectedRequirement.deadline)}</p>
-                  </div>
-                  <div className="bg-gray-50 p-4 rounded-xl">
-                    <h4 className="text-sm font-semibold text-gray-500 mb-2">Collaboration Type</h4>
-                    <p className="text-gray-900 font-medium">{selectedRequirement.collaborationType}</p>
-                  </div>
-                </div>
-                
-                {/* Requirements */}
-                <div className="mb-8">
-                  <h3 className="text-lg font-semibold mb-3 text-gray-800">Requirements</h3>
-                  <ul className="list-disc pl-5 text-gray-700 space-y-2">
-                    <li>Minimum {selectedRequirement.platform.includes(',') ? selectedRequirement.platform.split(',')[0].trim() : selectedRequirement.platform} following of 5,000+</li>
-                    <li>Experience creating content in the {selectedRequirement.category} niche</li>
-                    <li>Ability to complete the project before the deadline</li>
-                    <li>Professional communication and timely responses</li>
-                  </ul>
-                </div>
-                
-                {/* How to apply */}
-                <div className="mb-8">
-                  <h3 className="text-lg font-semibold mb-3 text-gray-800">How to Apply</h3>
-                  <p className="text-gray-700 mb-4">
-                    Click the "Apply for Collaboration" button below to express your interest. The brand will receive your profile and portfolio, and they'll reach out if they'd like to move forward.
-                  </p>
-                </div>
-              </div>
-              
-              {/* Footer with apply button */}
-              <div className="border-t border-gray-100 p-6 bg-gray-50">
-                <button 
-                  onClick={handleApply}
-                  className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 flex items-center justify-center gap-2 shadow-md"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  Apply for Collaboration
-                </button>
-              </div>
+              )}
             </motion.div>
           </motion.div>
         )}

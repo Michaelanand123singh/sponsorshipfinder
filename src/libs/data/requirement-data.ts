@@ -1,107 +1,236 @@
+// libs/data/requirement-data.ts
+
+/**
+ * Type definition for a collaboration requirement
+ */
 export interface Requirement {
-    id: string;
-    brand: string;
-    title: string;
-    description: string;
-    collaborationType: 'Paid' | 'Unpaid' | 'Barter';
-    budget?: string;
-    deadline: string;
-    platform: string;
-    category: string;
-    image: string;
+  id: string;
+  title: string;
+  brand: string;
+  description: string;
+  platform: string;
+  category: string;
+  collaborationType: 'Paid' | 'Unpaid' | 'Barter';
+  budget?: string;
+  deadline: string;
+  posted: string;
+  requirements?: string[];
+}
+
+/**
+ * Sample requirements data for the application
+ */
+export const requirements: Requirement[] = [
+  {
+    id: "req-001",
+    title: "Lifestyle Content Creator for Summer Collection",
+    brand: "Urban Threads",
+    description: "We're looking for a lifestyle content creator to showcase our new summer collection. The ideal creator has a bright, colorful aesthetic and creates authentic content that resonates with young adults. We need 5 Instagram posts and 2 Reels featuring our clothing in natural, everyday settings.",
+    platform: "Instagram",
+    category: "Fashion",
+    collaborationType: "Paid",
+    budget: "$1,500 - $2,000",
+    deadline: "2025-04-15",
+    posted: "2025-03-01",
+    requirements: [
+      "Minimum Instagram following of 10,000+",
+      "Previous experience with fashion brands",
+      "Bright, colorful aesthetic",
+      "Ability to create both static and video content"
+    ]
+  },
+  {
+    id: "req-002",
+    title: "Sustainable Living Advocate for Product Reviews",
+    brand: "EcoLife",
+    description: "EcoLife is seeking content creators passionate about sustainable living to review our new line of eco-friendly home products. We want authentic reviews highlighting the effectiveness and environmental benefits of our products. Looking for creators who can communicate clearly how these products fit into a sustainable lifestyle.",
+    platform: "YouTube, Instagram",
+    category: "Sustainability",
+    collaborationType: "Barter",
+    deadline: "2025-04-20",
+    posted: "2025-02-28",
+    requirements: [
+      "Genuine interest in sustainability",
+      "Experience with product reviews",
+      "Strong storytelling abilities",
+      "Either YouTube channel or Instagram account with engaged audience"
+    ]
+  },
+  {
+    id: "req-003",
+    title: "Fitness Coach for Workout App Promotion",
+    brand: "FitForce",
+    description: "FitForce is looking for fitness coaches and enthusiasts to create content showcasing our workout app's features. We need demonstrations of specific workout routines from our app, with emphasis on proper form and the app's tracking capabilities. The content should be motivational and highlight the app's user-friendly interface.",
+    platform: "Instagram, TikTok",
+    category: "Fitness",
+    collaborationType: "Paid",
+    budget: "$1,000 - $3,000",
+    deadline: "2025-04-10",
+    posted: "2025-02-25",
+    requirements: [
+      "Certified fitness coach or demonstrated expertise",
+      "Engaging on-camera presence",
+      "Minimum 8,000 followers on Instagram or TikTok",
+      "Ability to create dynamic workout content"
+    ]
+  },
+  {
+    id: "req-004",
+    title: "Food Creator for Recipe Development",
+    brand: "Flavor Fusion",
+    description: "Flavor Fusion is seeking food content creators to develop and showcase recipes using our artisanal spice blends. We're looking for creators who can create visually appealing food content while demonstrating how our spices elevate everyday recipes. The recipes should be approachable for home cooks while still being innovative.",
+    platform: "Instagram, TikTok, YouTube",
+    category: "Food & Cooking",
+    collaborationType: "Paid",
+    budget: "$800 per recipe",
+    deadline: "2025-04-30",
+    posted: "2025-03-02",
+    requirements: [
+      "Experience with recipe development",
+      "Strong food styling and photography skills",
+      "Ability to create step-by-step cooking content",
+      "Engaging presentation style"
+    ]
+  },
+  {
+    id: "req-005",
+    title: "Travel Photographer for Destination Guides",
+    brand: "Wanderlust",
+    description: "Wanderlust travel magazine is looking for photographers to create visual content for our online destination guides. We need photographers who can capture the essence of locations, from iconic landmarks to hidden gems. The content will be featured in our digital city guides and social media channels.",
+    platform: "Portfolio Submission",
+    category: "Travel",
+    collaborationType: "Paid",
+    budget: "$2,500 per destination",
+    deadline: "2025-05-15",
+    posted: "2025-02-20",
+    requirements: [
+      "Professional photography equipment",
+      "Previous travel photography experience",
+      "Strong portfolio demonstrating variety of styles",
+      "Ability to tell stories through images"
+    ]
+  },
+  {
+    id: "req-006",
+    title: "Beauty Influencer for Skincare Line Launch",
+    brand: "Glow Remedy",
+    description: "Glow Remedy is launching a new natural skincare line and seeking beauty creators to showcase the products. We're looking for creators who can demonstrate the application of the products, share their honest experiences, and highlight the natural ingredients. The content should focus on the clean beauty aspect and the results over time.",
+    platform: "Instagram, YouTube",
+    category: "Beauty",
+    collaborationType: "Paid",
+    budget: "$1,200 - $2,500",
+    deadline: "2025-04-05",
+    posted: "2025-02-27",
+    requirements: [
+      "Knowledge of skincare ingredients and routines",
+      "Ability to create before/after content",
+      "Minimum 15,000 followers with engaged beauty audience",
+      "Professional content quality"
+    ]
+  },
+  {
+    id: "req-007",
+    title: "Tech Reviewer for New Gadget Coverage",
+    brand: "TechEdge",
+    description: "TechEdge is seeking tech reviewers to create in-depth reviews of our new smart home devices. We need detailed, honest assessments that showcase the features, setup process, and real-world applications. Looking for reviewers who can explain complex features in an accessible way while demonstrating the product in action.",
+    platform: "YouTube",
+    category: "Technology",
+    collaborationType: "Paid",
+    budget: "$2,000 - $3,500",
+    deadline: "2025-04-25",
+    posted: "2025-03-01",
+    requirements: [
+      "Experience with tech product reviews",
+      "High-quality video production capabilities",
+      "Understanding of smart home ecosystem",
+      "Minimum 20,000 YouTube subscribers"
+    ]
+  },
+  {
+    id: "req-008",
+    title: "Parenting Creator for Educational Toy Series",
+    brand: "Little Learners",
+    description: "Little Learners is looking for parenting content creators to showcase our educational toy series. We need authentic content showing children engaging with our toys, highlighting both the fun and educational aspects. The content should demonstrate how the toys support developmental milestones while keeping children entertained.",
+    platform: "Instagram, TikTok, Blog",
+    category: "Parenting",
+    collaborationType: "Barter",
+    deadline: "2025-05-01",
+    posted: "2025-02-22",
+    requirements: [
+      "Parent with children aged 2-8",
+      "Authentic parenting content style",
+      "Ability to showcase product benefits naturally",
+      "Engaged audience of parents"
+    ]
+  },
+  {
+    id: "req-009",
+    title: "Mental Wellness Advocate for Meditation App",
+    brand: "MindfulMoment",
+    description: "MindfulMoment meditation app is seeking wellness content creators to share their experiences using our app. We're looking for authentic content about incorporating meditation into daily routines, the benefits experienced, and how specific features of the app support mental wellness. The content should be calming, honest, and inspiring.",
+    platform: "Instagram, YouTube, Podcast",
+    category: "Wellness",
+    collaborationType: "Paid",
+    budget: "$1,000 - $1,800",
+    deadline: "2025-04-18",
+    posted: "2025-02-26",
+    requirements: [
+      "Personal experience with meditation practices",
+      "Authentic approach to wellness content",
+      "Ability to create calming, mindful content",
+      "Audience interested in mental wellness"
+    ]
+  },
+  {
+    id: "req-010",
+    title: "DIY Creator for Home Improvement Tutorials",
+    brand: "HomeHack",
+    description: "HomeHack is looking for DIY and home improvement creators to develop tutorial content using our tools and products. We need step-by-step guides for beginner-friendly home projects that showcase how our tools make DIY projects accessible to everyone. The content should emphasize both the process and the satisfying results.",
+    platform: "YouTube, TikTok",
+    category: "DIY & Home",
+    collaborationType: "Paid",
+    budget: "$1,500 per project",
+    deadline: "2025-05-10",
+    posted: "2025-02-15",
+    requirements: [
+      "Experience with DIY projects and basic tools",
+      "Ability to create clear tutorial content",
+      "Engaging presentation style",
+      "High-quality video production capabilities"
+    ]
+  },
+  {
+    id: "req-011",
+    title: "Student Ambassador for Education Platform",
+    brand: "LearnSmart",
+    description: "LearnSmart online education platform is seeking student content creators to share their experiences using our platform for studying and skill development. We're looking for authentic content showing how LearnSmart fits into student life, improves learning outcomes, and prepares for future careers.",
+    platform: "TikTok, Instagram",
+    category: "Education",
+    collaborationType: "Unpaid",
+    deadline: "2025-04-22",
+    posted: "2025-03-01",
+    requirements: [
+      "Currently enrolled student (high school or university)",
+      "Interest in educational content",
+      "Engaging personality and presentation style",
+      "Creative approach to educational topics"
+    ]
+  },
+  {
+    id: "req-012",
+    title: "Pet Content Creator for New Toy Line",
+    brand: "PawPlay",
+    description: "PawPlay is seeking pet content creators to showcase our new line of interactive pet toys. We need engaging content showing pets playing with and enjoying our products. The content should highlight the toys' durability, interactive features, and how they keep pets mentally stimulated and physically active.",
+    platform: "Instagram, TikTok",
+    category: "Pets",
+    collaborationType: "Barter",
+    deadline: "2025-04-15",
+    posted: "2025-02-28",
+    requirements: [
+      "Dog or cat owner",
+      "Experience creating pet content",
+      "Ability to showcase product features naturally",
+      "Minimum 5,000 followers with engaged pet-loving audience"
+    ]
   }
-  
-  export const requirements: Requirement[] = [
-    {
-      id: '1',
-      brand: 'FitnessPro',
-      title: 'Workout Equipment Promotion',
-      description: 'Looking for fitness influencers to promote our new line of home workout equipment. We need content creators who can showcase the proper use of resistance bands, dumbbells, and yoga mats in home workout routines. Ideal candidates have an engaged audience interested in fitness, home workouts, or healthy lifestyles. The collaboration includes creating 3 posts featuring our products in use.',
-      collaborationType: 'Paid',
-      budget: '$500-$1000',
-      deadline: '2025-03-15',
-      platform: 'Instagram',
-      category: 'Fitness',
-      image: '/images/fitness.jpg'
-    },
-    {
-      id: '2',
-      brand: 'EcoFriendly',
-      title: 'Sustainable Product Review',
-      description: 'Seeking environmentally-conscious content creators to review our sustainable household products. We\'ve developed a line of biodegradable cleaning supplies and would like honest reviews from influencers who value sustainability. In exchange for your review, you\'ll receive a complete set of our products. We\'re looking for detailed feedback on effectiveness, scent, packaging, and overall experience.',
-      collaborationType: 'Barter',
-      deadline: '2025-03-20',
-      platform: 'YouTube',
-      category: 'Lifestyle',
-      image: '/images/eco.jpg'
-    },
-    {
-      id: '3',
-      brand: 'TechGadgets',
-      title: 'New Smartphone Feature Showcase',
-      description: 'Tech influencers needed to demonstrate unique features of our latest smartphone. We\'re looking for creators who can highlight our new AI-powered camera capabilities, extended battery life, and innovative user interface. Content should be creative and demonstrate how these features enhance the user experience. The collaboration includes one sponsored video and two social media posts.',
-      collaborationType: 'Paid',
-      budget: '$1000-$2000',
-      deadline: '2025-04-01',
-      platform: 'TikTok, Instagram',
-      category: 'Technology',
-      image: '/images/tech.jpg'
-    },
-    {
-      id: '4',
-      brand: 'BeautyEssentials',
-      title: 'Natural Makeup Tutorial',
-      description: 'Beauty creators to showcase our organic makeup line in a tutorial format. We would like to feature our products in a "natural everyday look" tutorial that highlights the clean ingredients and skin benefits. This is an opportunity to be featured on our brand page and gain exposure to our audience. While this is unpaid, we will provide full-size products for the tutorial.',
-      collaborationType: 'Unpaid',
-      deadline: '2025-03-25',
-      platform: 'Instagram, YouTube',
-      category: 'Beauty',
-      image: '/images/beauty.jpg'
-    },
-    {
-      id: '5',
-      brand: 'FoodieDelight',
-      title: 'Recipe Development with Our Ingredients',
-      description: 'Calling all food content creators! We\'re looking for influencers to develop unique recipes using our specialty sauces and condiments. You\'ll receive our complete product line and compensation for creating two original recipes with high-quality photos or videos showcasing the cooking process and final dish.',
-      collaborationType: 'Paid',
-      budget: '$300-$600',
-      deadline: '2025-04-10',
-      platform: 'Instagram, TikTok',
-      category: 'Food',
-      image: '/images/food.jpg'
-    },
-    {
-      id: '6',
-      brand: 'TravelEssentials',
-      title: 'Travel Accessory Feature',
-      description: 'Travel influencers wanted to showcase our innovative travel accessories in real-world situations. We\'ll provide our compact luggage organizers, tech pouches, and travel pillows for you to feature in your content. In exchange, you keep the products and we\'ll share your content on our channels.',
-      collaborationType: 'Barter',
-      deadline: '2025-04-15',
-      platform: 'Instagram, Blog',
-      category: 'Travel',
-      image: '/images/travel.jpg'
-    },
-    {
-      id: '7',
-      brand: 'GamingGear',
-      title: 'Gaming Peripherals Review',
-      description: 'Gaming content creators needed to review our new line of gaming keyboards, mice, and headsets. We\'re looking for detailed reviews that showcase the features, performance, and value of our products compared to competitors. This is a high-visibility campaign with substantial compensation.',
-      collaborationType: 'Paid',
-      budget: '$800-$1500',
-      deadline: '2025-03-30',
-      platform: 'YouTube, Twitch',
-      category: 'Gaming',
-      image: '/images/gaming.jpg'
-    },
-    {
-      id: '8',
-      brand: 'PetLovers',
-      title: 'Pet Product Testimonial',
-      description: 'Looking for pet influencers to try our new organic pet treats and provide authentic testimonials. Simply share your pet\'s experience with our products in a natural, engaging way. We\'ll provide a 3-month supply of treats for your participation.',
-      collaborationType: 'Barter',
-      deadline: '2025-04-05',
-      platform: 'Instagram, TikTok',
-      category: 'Pets',
-      image: '/images/pets.jpg'
-    }
-  ];
+];

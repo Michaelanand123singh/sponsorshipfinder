@@ -24,7 +24,7 @@ export interface Influencer {
       niche: "Fitness",
       followers: 450000,
       engagement: 3.2,
-      platforms: ["Instagram", "TikTok", "YouTube"],
+      platforms: ["Instagram", "TikTok", "YouTube", "Facebook"],
       bio: "Certified personal trainer sharing workout tips and nutritional advice.",
       location: "Los Angeles, CA",
       averageLikes: 32000,
@@ -166,7 +166,73 @@ export interface Influencer {
       averageComments: 2700,
       contentTypes: ["Investment Tips", "Financial Education", "Market Analysis"],
       previousBrands: ["Robinhood", "Wealthfront", "Acorns"]
-    }
+    },
+
+    {
+      id: "inf10",
+      name: "Ryan Lee",
+      image: "/influencers/ryan-lee.jpg",
+      niche: "Education",
+      followers: 420000,
+      engagement: 2.9,
+      platforms: ["YouTube", "Twitter", "LinkedIn"],
+      bio: "Financial advisor sharing investment strategies and personal finance tips.",
+      location: "Boston, MA",
+      averageLikes: 32000,
+      averageComments: 2700,
+      contentTypes: ["Investment Tips", "Financial Education", "Market Analysis"],
+      previousBrands: ["Robinhood", "Wealthfront", "Acorns"]
+    },
+
+    {
+      id: "inf10",
+      name: "Ryan Lee",
+      image: "/influencers/ryan-lee.jpg",
+      niche: "Health Care",
+      followers: 420000,
+      engagement: 2.9,
+      platforms: ["YouTube", "Twitter", "LinkedIn"],
+      bio: "Financial advisor sharing investment strategies and personal finance tips.",
+      location: "Boston, MA",
+      averageLikes: 32000,
+      averageComments: 2700,
+      contentTypes: ["Investment Tips", "Financial Education", "Market Analysis"],
+      previousBrands: ["Robinhood", "Wealthfront", "Acorns"]
+    },
+
+    {
+      id: "inf10",
+      name: "Ryan Lee",
+      image: "/influencers/ryan-lee.jpg",
+      niche: "Automobiles",
+      followers: 420000,
+      engagement: 2.9,
+      platforms: ["YouTube", "Twitter", "LinkedIn"],
+      bio: "Financial advisor sharing investment strategies and personal finance tips.",
+      location: "Boston, MA",
+      averageLikes: 32000,
+      averageComments: 2700,
+      contentTypes: ["Investment Tips", "Financial Education", "Market Analysis"],
+      previousBrands: ["Robinhood", "Wealthfront", "Acorns"]
+    },
+
+    {
+      id: "inf10",
+      name: "Ryan Lee",
+      image: "/influencers/ryan-lee.jpg",
+      niche: "Others",
+      followers: 420000,
+      engagement: 2.9,
+      platforms: ["YouTube", "Twitter", "LinkedIn"],
+      bio: "Financial advisor sharing investment strategies and personal finance tips.",
+      location: "Boston, MA",
+      averageLikes: 32000,
+      averageComments: 2700,
+      contentTypes: ["Investment Tips", "Financial Education", "Market Analysis"],
+      previousBrands: ["Robinhood", "Wealthfront", "Acorns"]
+    },
+
+
   ];
   
   // Group influencers by niche
