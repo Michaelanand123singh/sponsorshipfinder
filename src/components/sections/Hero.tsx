@@ -1,8 +1,25 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, Target, Users, Star } from 'lucide-react';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ArrowRight, Sparkles, Target, Users, Star, Search } from 'lucide-react';
 
 const Hero = () => {
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const navigate = useNavigate();
+
+  // Handle search input change
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
+
+  // Handle search submission
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      // Redirect to FeedPage with the search query as a URL parameter
+      navigate(`/feed?search=${encodeURIComponent(searchQuery)}`);
+    }
+  };
+
   const stats = [
     {
       icon: <Users className="w-5 h-5 text-blue-600" />,
@@ -25,7 +42,7 @@ const Hero = () => {
   ];
 
   return (
-    <section className="pt-24 pb-16 px-4 relative overflow-hidden">
+    <section className="pt-24 pb-16 px-4 mt-20 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute -top-40 -right-32 w-96 h-96 rounded-full bg-blue-100/50 blur-3xl" />
@@ -50,6 +67,22 @@ const Hero = () => {
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
             Connect with brands that align with your values. Our AI-powered platform matches creators with sponsors for authentic partnerships.
           </p>
+          
+          {/* Search Bar */}
+          <form onSubmit={handleSearchSubmit} className="w-full max-w-2xl mx-auto mb-12">
+            <div className="relative">
+              <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                <Search className="w-5 h-5" />
+              </div>
+              <input
+                type="text"
+                placeholder="Search for sponsorship opportunities..."
+                value={searchQuery}
+                onChange={handleSearchChange}
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+          </form>
           
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">

@@ -25,7 +25,7 @@ const buttonVariants = cva(
         default: "bg-slate-900 text-white hover:bg-slate-800 focus:bg-slate-700",
         destructive: "bg-red-500 text-white hover:bg-red-600 focus:bg-red-700",
         outline: "border border-slate-200 bg-white hover:bg-slate-100 hover:text-slate-900 focus:bg-slate-50",
-        secondary: "bg-slate-100 text-slate-900 hover:bg-slate-200 focus:bg-slate-150",
+        secondary: "bg-slate-100 text-slate-900 hover:bg-slate-200 focus:bg-slate-200", // Fixed focus class
         ghost: "hover:bg-slate-100 hover:text-slate-900 focus:bg-slate-50",
         link: "text-slate-900 underline-offset-4 hover:underline focus:underline",
       },
@@ -106,7 +106,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const ariaProps = useMemo(() => ({
       'aria-disabled': isDisabled ? 'true' : undefined,
       'aria-busy': isLoading ? 'true' : undefined,
-    }), [isDisabled, isLoading]);
+      // Ensure aria-label is present for icon-only buttons or when explicitly provided
+      'aria-label': ariaLabel || ((!children || size === 'icon') ? 'Button' : undefined),
+    }), [isDisabled, isLoading, ariaLabel, children, size]);
 
     return (
       <button
@@ -115,36 +117,32 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={isDisabled}
         {...ariaProps}
         {...props}
-        // Ensure aria-label is present for icon-only buttons
-        aria-label={ariaLabel || (size === 'icon' && typeof children === 'undefined' 
-          ? 'Button' 
-          : undefined)}
       >
-        {isLoading ? (
+        {leftIcon && !isLoading && (
+          <span 
+            className="mr-2 inline-flex items-center" 
+            aria-hidden="true"
+          >
+            {leftIcon}
+          </span>
+        )}
+        
+        {isLoading && (
           <Loader2 
             className="mr-2 h-4 w-4 animate-spin" 
             aria-hidden="true" 
           />
-        ) : (
-          <>
-            {leftIcon && (
-              <span 
-                className="mr-2 inline-flex items-center" 
-                aria-hidden="true"
-              >
-                {leftIcon}
-              </span>
-            )}
-            {children}
-            {rightIcon && (
-              <span 
-                className="ml-2 inline-flex items-center" 
-                aria-hidden="true"
-              >
-                {rightIcon}
-              </span>
-            )}
-          </>
+        )}
+        
+        {children}
+        
+        {rightIcon && !isLoading && (
+          <span 
+            className="ml-2 inline-flex items-center" 
+            aria-hidden="true"
+          >
+            {rightIcon}
+          </span>
         )}
       </button>
     );

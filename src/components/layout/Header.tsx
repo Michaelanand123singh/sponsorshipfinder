@@ -67,6 +67,17 @@ const Header = () => {
               Home
             </Link>
             <Link 
+              to="/feed" 
+              className={`font-medium transition-colors ${
+                isActive('/feed') 
+                  ? 'text-blue-600' 
+                  : 'text-gray-700 hover:text-blue-600'
+              }`}
+              role="menuitem"
+            >
+              Feed
+            </Link>
+            <Link 
               to="/influencers" 
               className={`font-medium transition-colors ${
                 isActive('/influencers') 
@@ -179,6 +190,18 @@ const Header = () => {
             role="menuitem"
           >
             Home
+          </Link>
+          <Link 
+            to="/feed" 
+            className={`block px-4 py-2 ${
+              isActive('/feed') 
+                ? 'text-blue-600 bg-gray-50' 
+                : 'text-gray-700 hover:bg-gray-50'
+            }`}
+            onClick={handleMobileNavClick}
+            role="menuitem"
+          >
+            Feed
           </Link>
           <Link 
             to="/influencers" 

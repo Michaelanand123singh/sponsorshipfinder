@@ -3,10 +3,11 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home';
-import Brand from './pages/Brand';
-import Influencer from './pages/Influencer';
-import InfluencerData from './pages/Influencer-data';
-import BrandData from './pages/Brand-data';
+import Brand from './pages/BrandRegistration';
+import Influencer from './pages/InfluencerRegistration';
+import InfluencerData from './pages/Influencer';
+import BrandData from './pages/Brand';
+import FeedPage from './pages/FeedPage';
 
 // Loading Fallback Component
 const LoadingFallback: React.FC = () => (
@@ -127,6 +128,20 @@ const App: React.FC = () => {
                         description="Comprehensive brand insights and analytics"
                       />
                       <BrandData />
+                    </>
+                  } 
+                />
+
+                {/* Feed Page Route */}
+                <Route 
+                  path="/feed" 
+                  element={
+                    <>
+                      <SEOMetadata 
+                        title="Content Feed | SponsorshipFinder" 
+                        description="Explore the latest content and opportunities from brands and creators"
+                      />
+                      <FeedPage />
                     </>
                   } 
                 />

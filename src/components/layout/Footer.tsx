@@ -22,6 +22,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><Link to="/influencer/signup" className="text-gray-300 hover:text-white text-sm">Create Profile</Link></li>
               <li><Link to="/browse-brands" className="text-gray-300 hover:text-white text-sm">Browse Brands</Link></li>
+              <li><Link to="/feed" className="text-gray-300 hover:text-white text-sm">Explore Feed</Link></li>
               <li><Link to="/how-it-works" className="text-gray-300 hover:text-white text-sm">How It Works</Link></li>
               <li><Link to="/success-stories" className="text-gray-300 hover:text-white text-sm">Success Stories</Link></li>
             </ul>
@@ -33,6 +34,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><Link to="/brand/signup" className="text-gray-300 hover:text-white text-sm">Register Brand</Link></li>
               <li><Link to="/find-influencers" className="text-gray-300 hover:text-white text-sm">Find Influencers</Link></li>
+              <li><Link to="/feed" className="text-gray-300 hover:text-white text-sm">Post Opportunities</Link></li>
               <li><Link to="/campaign-tools" className="text-gray-300 hover:text-white text-sm">Campaign Tools</Link></li>
               <li><Link to="/pricing" className="text-gray-300 hover:text-white text-sm">Pricing</Link></li>
             </ul>
@@ -45,6 +47,7 @@ const Footer = () => {
               <li><Link to="/contact" className="text-gray-300 hover:text-white text-sm">Contact Us</Link></li>
               <li><Link to="/faq" className="text-gray-300 hover:text-white text-sm">FAQ</Link></li>
               <li><Link to="/blog" className="text-gray-300 hover:text-white text-sm">Blog</Link></li>
+              <li><Link to="/feed/featured" className="text-gray-300 hover:text-white text-sm">Featured Opportunities</Link></li>
               <li><Link to="/resources" className="text-gray-300 hover:text-white text-sm">Resources</Link></li>
             </ul>
           </div>
